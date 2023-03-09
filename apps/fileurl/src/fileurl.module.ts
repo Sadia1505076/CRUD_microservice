@@ -4,8 +4,8 @@ import { FileUrlService } from './fileurl.service';
 import { PrismaService } from './prisma.service';
 
 @Module({
-  imports: [],
+  imports:     [],
   controllers: [FileUrlController],
-  providers: [FileUrlService, PrismaService],
+  providers:   [FileUrlService, PrismaService],
 })
 export class FileurlModule {}

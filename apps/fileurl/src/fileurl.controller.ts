@@ -21,21 +21,20 @@ export class FileUrlController {
 
   @Post('')
   async create(@Res() res, @Body() createFileUrlDTO: CreateFileUrlDTO) {
-    const newFileUrl = await this.fileUrlService.createFileUrl(
-      createFileUrlDTO,
-    );
+    const newFileUrl = await this.fileUrlService.createFileUrl(createFileUrlDTO);
+
     return res.status(HttpStatus.CREATED).json({
       statusCode: HttpStatus.CREATED,
-      message: 'New file url is created',
-      data: newFileUrl,
+      message:    'New file url is created',
+      data:       newFileUrl,
     });
   }
 
   @Get('/:item_id/:app_id/:business_id')
   async getFileUrl(
-    @Res() res,
-    @Param('item_id', PositiveIntPipe) item_id: number,
-    @Param('app_id', PositiveIntPipe) app_id: number,
+    @Res()                                 res,
+    @Param('item_id', PositiveIntPipe)     item_id:     number,
+    @Param('app_id', PositiveIntPipe)      app_id:      number,
     @Param('business_id', PositiveIntPipe) business_id: number,
   ) {
     const fileUrl = await this.fileUrlService.getFileUrl(
@@ -53,26 +52,27 @@ export class FileUrlController {
 
     return res.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,
-      message: 'ok',
-      data: updatedFileUrl,
+      message:    'ok',
+      data:       updatedFileUrl,
     });
   }
 
   @Get('')
   async getFileUrls(@Res() res) {
     const fileUrls = await this.fileUrlService.getAllFileUrls();
+
     return res.status(HttpStatus.OK).json({
       statusCode: HttpStatus.OK,
-      message: 'ok',
-      data: fileUrls,
+      message:    'ok',
+      data:       fileUrls,
     });
   }
 
   @Put(':id')
   async updateFileUrl(
-    @Res() res,
-    @Param('id', PositiveIntPipe) id: number,
-    @Body() updateFileUrlDTO: UpdateFileUrlDTO,
+    @Res()                        res,
+    @Param('id', PositiveIntPipe) id:               number,
+    @Body()                       updateFileUrlDTO: UpdateFileUrlDTO,
   ) {
     try {
       const editedFileUrl = await this.fileUrlService.updateFileUrl(
@@ -81,8 +81,8 @@ export class FileUrlController {
       );
       return res.status(HttpStatus.OK).json({
         statusCode: HttpStatus.OK,
-        message: 'ok',
-        data: editedFileUrl,
+        message:    'ok',
+        data:       editedFileUrl,
       });
     } catch (error) {
       throw new NotFoundException('fileurl does not exist!');
@@ -93,10 +93,11 @@ export class FileUrlController {
   async deleteFileUrl(@Res() res, @Param('id', PositiveIntPipe) id: number) {
     try {
       const deletedFileUrl = await this.fileUrlService.deleteFileUrl(id);
+      
       return res.status(HttpStatus.OK).json({
         statusCode: HttpStatus.OK,
-        message: 'ok',
-        data: deletedFileUrl,
+        message:    'ok',
+        data:       deletedFileUrl,
       });
     } catch (error) {
       throw new NotFoundException('FileUrl does not exist!');

@@ -13,18 +13,18 @@ export class FileUrlService {
   async createFileUrl(createFileUrlDTO: CreateFileUrlDTO): Promise<fileurl> {
     let newFileUrl: Prisma.fileurlCreateInput = {
       ...createFileUrlDTO,
-      status: true,
+      status:     true,
       sort_order: 1,
-      isDelete: false,
-      isPublish: true,
-      hitCount: 0,
+      isDelete:   false,
+      isPublish:  true,
+      hitCount:   0,
     };
     return this.prisma.fileurl.create({ data: newFileUrl });
   }
 
   async getFileUrl(
-    item_id: number,
-    app_id: number,
+    item_id:     number,
+    app_id:      number,
     business_id: number,
   ): Promise<FileUrlOrNull> {
     return this.prisma.fileurl.findFirst({
