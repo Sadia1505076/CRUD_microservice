@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model fileurl {
+  id          Int       @id @default(autoincrement())
+  fileurl     String    @db.VarChar(500)
+  item_id     Int
+  module_key  String    @db.VarChar(200)
+  app_id      Int
+  business_id Int
+  image_alt   String?   @db.VarChar(200)
+  image_title String?   @db.VarChar(200)
+  description String?   @db.VarChar(200)
+  updatedBy   String?   @db.VarChar(200)
+  deletedAt   DateTime? @db.DateTime(0)
+  remoteAddr  String?   @db.VarChar(200)
+  userAgent   String?   @db.VarChar(200)
+  status      Boolean   @default(true)
+  sort_order  Int
+  createdAt   DateTime  @default(now()) @db.DateTime(0)
+  updatedAt   DateTime  @default(now()) @db.DateTime(0)
+  isDelete    Boolean   @default(false)
+  isPublish   Boolean   @default(true)
+  hitCount    Int       @default(0)
+
+  @@index([item_id, app_id, business_id], map: "itemId_appId_businessId_index")
+}
